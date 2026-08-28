@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    container_name: examhub_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: fiderana03
+      POSTGRES_DB: examhub
+    ports:
+      - "5432:5432"
+    volumes:
+      - examhub_pgdata:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+volumes:
+  examhub_pgdata:
